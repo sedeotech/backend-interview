@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package item;
+
+option go_package          = "github.com/sedeotech/backend-interview/pkg/rpc/itempb";
+option java_multiple_files = true;
+option java_package        = "fr.sedeo";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "type/pager.proto";
+import "type/media.proto";
+
+message ItemMsg{
+	
+	string               uuid        = 1;
+	string               name        = 2;
+	string               description = 4;
+	
+	//repeated type.ImageMsg images = 6;
+	
+	double price = 7;
+	
+	google.protobuf.Timestamp created = 40;
+	google.protobuf.Timestamp updated = 41;
+}
+
+message ItemCreateMsg {
+	string          name            = 1;
+	string          description     = 2;
+	double price = 3;
+}
+
+message ItemUpdateMsg {
+	ItemMsg item = 1;
+}
+
+message ItemDeleteMsg {
+	string item_uuid = 1;
+}
+
+message ItemGetMsg {
+	string item_uuid = 1;
+}
+
+message ItemGetResultMsg {
+	ItemMsg item = 1;
+}
+
+message ItemListMsg {
+	type.PageRequestMsg request = 1;
+}
+
+message ItemListResultMsg {
+	repeated ItemMsg items = 1;
+	type.PagerMsg    pager = 2;
+}
+
+// message ItemAddImageMsg {
+	//     string item_uuid = 1;
+	//     string mime_type = 2;
+	//     bytes  image     = 3;
+	//     int32  order     = 4;
+	//     string alt       = 5;
+	// }
+	
+	// message ItemDeleteImageMsg {
+		//     string image_uuid = 1;
+		// }
+		
+		service Item {
+			rpc Create(ItemCreateMsg) returns (ItemMsg);
+			rpc Update(ItemUpdateMsg) returns (ItemMsg);
+			rpc Delete(ItemDeleteMsg) returns (google.protobuf.Empty);
+			rpc Get(ItemGetMsg) returns (ItemGetResultMsg);
+			rpc List (ItemListMsg) returns (ItemListResultMsg);
+			
+			// rpc AddImage(ItemAddImageMsg) returns (type.ImageMsg);
+			// rpc DeleteImage(ItemDeleteImageMsg) returns (google.protobuf.Empty);
+			
+		}

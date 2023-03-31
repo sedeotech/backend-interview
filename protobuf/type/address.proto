@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package type;
+option go_package          = "github.com/sedeotech/backend-interview/pkg/rpc/typepb";
+
+import "google/protobuf/timestamp.proto";
+
+message AddressMsg{
+
+    string UUID = 1;
+    string line1 = 2;
+    string line2 = 3;
+    string line3 = 4;
+    string city = 5;
+    string province = 6;
+    string zipCode = 7;
+    string countryCode = 8;
+    string other = 9;
+
+    google.protobuf.Timestamp updated = 40;
+    google.protobuf.Timestamp created = 41;
+}

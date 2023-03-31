@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package type;
+option go_package          = "github.com/sedeotech/backend-interview/pkg/rpc/typepb";
+
+message PagerMsg{
+	string sorting = 1;
+	string order = 2;
+	int64 current = 3;
+	int64 total = 4;
+}
+
+message PageRequestMsg{
+	string sorting = 1;
+	string order = 2;
+	int64 requested = 3;
+	int64 size = 4;
+}

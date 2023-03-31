@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package type;
+
+option go_package          = "github.com/sedeotech/backend-interview/pkg/rpc/typepb";
+option java_multiple_files = true;
+option java_package        = "com.sedeo";
+
+import "google/protobuf/timestamp.proto";
+
+message ImageMsg {
+	enum Type {
+		IMAGE      = 0;
+		VIDEO      = 1;
+		AUDIO      = 2;
+		LIVEPHOTO  = 3;
+		BURST      = 4;
+		SLOWMOTION = 5;
+		MODEL3D    = 6;
+	}
+
+	string uuid   = 1;
+	int32  order  = 2;
+	string alt    = 3;
+	string url    = 4;
+	int64  size   = 5;
+	string mime   = 6;
+	int64  width  = 7;
+	int64  height = 8;
+	Type   type   = 9;
+
+	google.protobuf.Timestamp created = 40;
+	google.protobuf.Timestamp updated = 41;
+}
